@@ -1,0 +1,35 @@
+/**
+body {
+
+    background-color: darkcyan;
+
+}
+**/
+
+/**
+ * Media Query
+ **/
+ 
+ /**
+ @media screen and (max-width: 768px) {
+    
+    img {
+        width: 200px;
+        height: 200px;
+        
+    }
+  }    
+  
+  **/
+  /* Additional Screen Sizes */
+  
+  /* Width at 640px and below */
+  /**
+  @media screen and (max-width: 640px) {
+  
+    img {
+        width: 150px;
+        height: 150px;
+    }
+  }
+  **/
