@@ -1,84 +1,52 @@
+
 // Initialize Firebase
-
-
-
-
-  // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyDfzcxqDxCDvRcqGK5PHB4CcrXM3JjTCCw",
     authDomain: "train-schedular-dbffc.firebaseapp.com",
     databaseURL: "https://train-schedular-dbffc.firebaseio.com",
     projectId: "train-schedular-dbffc",
     storageBucket: "",
     messagingSenderId: "597374407977"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-
-
-
+// A variable to reference the database.
 var database = firebase.database();
 
 
+// When someone submits the form
 
-// movie reviewer
-
-
-
-// allows a user or any user
-
-
-
-// to add a movie with a title, rating, and short review of the film
-
-
-
-// that anyone can see in a table
-
-
-
-// when someone submit the form
-
-$("#form-submit").on("click", function(e){
-
+$("#submit-train").on("click", function (e) {
     e.preventDefault();
-
-    var movieTitle = $("#movie-title").val().trim();
-
-    var movieRating = $("#movie-rating").val().trim();
-
-    var movieReview = $("#movie-review").val().trim();
+    var trainName = $("#train-name").val().trim();
+    var trainDestination = $("#destination").val().trim();
+    var trainFirstTime = $("#first-train-time").val().trim();
+    var trainFrequency = $("#frequency").val().trim();
 
 
-
-    // get the user input from the title, rating, and short review fields
+    // Get the user input from the train-name, destination, first-train-time,
+    // and frequency fields and put it into the Firebase database
 
     database.ref().push({
-
-        title: movieTitle,
-
-        rating: movieRating,
-
-        review: movieReview
-
+        name: trainName,
+        destination: trainDestination,
+        firstTime: trainFirstTime,
+        frequency: trainFrequency
     });
 
 });
 
+// Need to calculte Next Arrival (nextArrival) and Minutes Away (minutesAway) - these have
+// all ready been put into the table below
 
 
+// Get all the records from the Firebase database and display that info
+// in the table
 
-
-// get all the records from the firebase database 
-
-// and display that info on the table
-
-
-
-database.ref().on("child_added", function(snapshot){
+database.ref().on("child_added", function (snapshot) {
 
     console.log(snapshot.val());
 
-    $("table tbody").append("<tr><td>"+snapshot.val().title+"</td><td>"+snapshot.val().rating+"/10</td><td>"+snapshot.val().review+"</td></tr>");
+    $("table tbody").append("<tr><td>" + snapshot.val().name + "</td><td>" + snapshot.val().destination + "</td><td>" + snapshot.val().frequency + "</td><td>" + snapshot.val().nextArrival + "</td><td>" + snapshot.val().minutesAway +"</td></tr>");
 
 });
